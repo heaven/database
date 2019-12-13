@@ -137,12 +137,7 @@ class Chef
               begin
                 repair_sql = "GRANT #{new_resource.privileges.join(',')}"
                 repair_sql += " ON #{db_name}.#{tbl_name}"
-                repair_sql += " TO '#{new_resource.username}'@'#{new_resource.host}' IDENTIFIED BY"
-                repair_sql += if new_resource.password.is_a?(HashedPassword)
-                                " PASSWORD '#{new_resource.password}'"
-                              else
-                                " '#{new_resource.password}'"
-                              end
+                repair_sql += " TO '#{new_resource.username}'@'#{new_resource.host}'"
                 repair_sql += ' REQUIRE SSL' if new_resource.require_ssl
                 repair_sql += ' REQUIRE X509' if new_resource.require_x509
                 repair_sql += ' WITH GRANT OPTION' if new_resource.grant_option
